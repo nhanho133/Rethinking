@@ -1,0 +1,19 @@
+[pool] 118287 COCO-sourced candidate rows
+[progress] attempted=1000 ok=1000 (100.0% hit rate) elapsed=29s
+[progress] attempted=2000 ok=2000 (100.0% hit rate) elapsed=61s
+[progress] attempted=3000 ok=3000 (100.0% hit rate) elapsed=90s
+[progress] attempted=4000 ok=3999 (100.0% hit rate) elapsed=120s
+[progress] attempted=5000 ok=4999 (100.0% hit rate) elapsed=149s
+[progress] attempted=6000 ok=5999 (100.0% hit rate) elapsed=178s
+[progress] attempted=7000 ok=6999 (100.0% hit rate) elapsed=207s
+[progress] attempted=8000 ok=7999 (100.0% hit rate) elapsed=237s
+[progress] attempted=9000 ok=8999 (100.0% hit rate) elapsed=266s
+[progress] attempted=10000 ok=9999 (100.0% hit rate) elapsed=295s
+[progress] attempted=11000 ok=10998 (100.0% hit rate) elapsed=324s
+[progress] attempted=12000 ok=11998 (100.0% hit rate) elapsed=353s
+[progress] attempted=13000 ok=12998 (100.0% hit rate) elapsed=383s
+[progress] attempted=14000 ok=13998 (100.0% hit rate) elapsed=414s
+[progress] attempted=15000 ok=14998 (100.0% hit rate) elapsed=451s
+[progress] attempted=16000 ok=15997 (100.0% hit rate) elapsed=494s
+[done] 15997 images downloaded from 16000 attempts (100.0% hit rate) in 494s
+[manifest] wrote 15997 items -> /home/tachau/sharegpt4v_data/manifest.json (train=15198, test=799)

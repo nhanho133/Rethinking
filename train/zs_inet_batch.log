@@ -1,0 +1,7 @@
+=== vanilla_b8 ===
+[RESULT] ImageNetV2 zero-shot: top1=22.0700% top5=48.2500% (n=10000)
+=== ours_b96 ===
+[RESULT] ImageNetV2 zero-shot: top1=28.3500% top5=57.2600% (n=10000)
+=== vanilla_b96 ===
+[RESULT] ImageNetV2 zero-shot: top1=30.5300% top5=60.0600% (n=10000)
+ALL_INET_DONE

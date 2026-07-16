@@ -1,0 +1,33 @@
+nohup python eval_all.py --ckpt /home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/sharedgpt4v_propose_train_100k_13sent_8/ckpt/B16-longclip-11-04--08_48_40_-8.pt --disable docci dci imagenet_o imagenet_s imagenet_v2 art urban1k share4v flickr coco > eval_share100k_13sent_8.log 2>&1 &
+# --disable docci dci imagenet_o imagenet_s imagenet_v2 art urban1k share4v flickr coco
+/home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/sharedgpt4v_propose_train_1k/ckpt/B16-longclip-10-30--10_06_18_-6.pt
+python eval_all.py --ckpt /home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/sharedgpt4v_10k_old_sampling_train_B16_numtxt_6/ckpt/B16-longclip-11-14--10_28_33_-8.pt --disable imagenet_o imagenet_s imagenet_v2 art openV1
+
+
+python eval_all.py --ckpt /home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/artpedia_propose_train/ckpt/B16-longclip-10-30--10_33_35_-8.pt --disable docci dci imagenet_o imagenet_s imagenet_v2 art urban1k share4v flickr coco
+
+
+lấy checkpoint L/14 infer ra: /home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/archive_train_result/docci_full_propose_adaptive_L14
+Lấy checkpoint B/16 infer ra:
+/home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/archive_train_result/learnable_sparsemax_docci_b16
+
+
+
+python -u openEvenv1.py \
+  --root_dir "/home/ubuntu/shared/OpenEvenv1/train/Train Set" \
+  --csv_name gt_train.csv \
+  --images_dir train_images_compressed90 \
+  --split test \
+  --batch_size 64 \
+  --num_workers 32 \
+  --device cuda:1 \
+  --max_details 4
+
+python submit_openeventv1_track2.py \
+  --ckpt_path /home/ubuntu/hieu.tq/Git/KDPL_test/KDPL/src/LongCLIPMul_docci/train/openV1_propose_train_L14/ckpt/L14-longclip-11-07--18_55_29_-8.pt \
+  --phase public \
+  --query_csv "/home/ubuntu/shared/OpenEvenv1/test/Track 2 - Public Set/query.csv" \
+  --gallery_dir "/home/ubuntu/shared/OpenEvenv1/database" \
+  --device cuda:1 \
+  --batch_size 64 --num_workers 8 \
+  --output_prefix submission_longclip

@@ -1,0 +1,18 @@
+[data] 5000 images from coco
+[cache] found existing /home/tachau/eval_data/coco/llm2vec_cc_cache.pt
+[TextEmbeddingCache] loaded 4959 embeddings (dim=4096) from /home/tachau/eval_data/coco/llm2vec_cc_cache.pt
+  [encode] 0/5000
+  [encode] 640/5000
+  [encode] 1280/5000
+  [encode] 1920/5000
+  [encode] 2560/5000
+  [encode] 3200/5000
+  [encode] 3840/5000
+  [encode] 4480/5000
+[RESULT] coco zero-shot, ckpt=RELEASED, n=5000
+[RESULT]   T2I_R1: 51.3200%
+[RESULT]   T2I_R5: 76.3000%
+[RESULT]   T2I_R10: 84.7400%
+[RESULT]   I2T_R1: 47.5600%
+[RESULT]   I2T_R5: 73.4000%
+[RESULT]   I2T_R10: 82.1400%

@@ -1,0 +1,67 @@
+[
+  {
+    "benchmark": "flickr30k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_docci_50ep/ckpt/llm2clip_text-B16-07-07--03_10_26_-49.pt",
+    "arch": "text",
+    "n_images": 1000,
+    "n_captions": 5000,
+    "T2I_R1": 0.412,
+    "T2I_R5": 0.703,
+    "T2I_R10": 0.797,
+    "I2T_R1": 0.433,
+    "I2T_R5": 0.767,
+    "I2T_R10": 0.859
+  },
+  {
+    "benchmark": "coco",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_docci_50ep/ckpt/llm2clip_text-B16-07-07--03_10_26_-49.pt",
+    "arch": "text",
+    "n_images": 5000,
+    "n_captions": 25014,
+    "T2I_R1": 0.22543375709602623,
+    "T2I_R5": 0.4579835292236348,
+    "T2I_R10": 0.573358919005357,
+    "I2T_R1": 0.2426,
+    "I2T_R5": 0.4984,
+    "I2T_R10": 0.616
+  },
+  {
+    "benchmark": "urban1k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_docci_50ep/ckpt/llm2clip_text-B16-07-07--03_10_26_-49.pt",
+    "arch": "text",
+    "n_images": 1000,
+    "n_captions": 1000,
+    "T2I_R1": 0.571,
+    "T2I_R5": 0.82,
+    "T2I_R10": 0.877,
+    "I2T_R1": 0.681,
+    "I2T_R5": 0.87,
+    "I2T_R10": 0.931
+  },
+  {
+    "benchmark": "sg4v1k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_docci_50ep/ckpt/llm2clip_text-B16-07-07--03_10_26_-49.pt",
+    "arch": "text",
+    "n_images": 799,
+    "n_captions": 799,
+    "T2I_R1": 0.7321652065081352,
+    "T2I_R5": 0.9411764705882353,
+    "T2I_R10": 0.9737171464330413,
+    "I2T_R1": 0.8247809762202754,
+    "I2T_R5": 0.9662077596996246,
+    "I2T_R10": 0.9912390488110138
+  },
+  {
+    "benchmark": "docci",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_docci_50ep/ckpt/llm2clip_text-B16-07-07--03_10_26_-49.pt",
+    "arch": "text",
+    "n_images": 5100,
+    "n_captions": 5100,
+    "T2I_R1": 0.8023529411764706,
+    "T2I_R5": 0.9654901960784313,
+    "T2I_R10": 0.9837254901960785,
+    "I2T_R1": 0.7850980392156863,
+    "I2T_R5": 0.9568627450980393,
+    "I2T_R10": 0.9829411764705882
+  }
+]

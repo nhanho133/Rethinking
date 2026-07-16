@@ -1,0 +1,25 @@
+DDP Done
+[Init] LLM2CLIP text-teacher (freeze_visual=False); text cache: /home/tachau/docci_data/llm2vec_cc_cache.pt
+[Init] loss_w (w_long,w_pos,w_longer,w_hinge) = (1.0, 1.0, 1.0, 1.0)
+[TextEmbeddingCache] loaded 281740 embeddings (dim=4096) from /home/tachau/docci_data/llm2vec_cc_cache.pt
+[Init] use_hinge_loss=True, hinge_weight=0.5
+[optim] llm2clip param groups: visual(lr=1e-06, n=152) + adapter(lr=0.001, n=5)
+/home/tachau/Rethinking_project/train/train.py:172: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  self.scaler = GradScaler()
+
+ Train model:llm2clip_text -- use learnable mps:False
+Number of bars:4
+Batch size:8 
+
+tạo train test
+json path:/home/tachau/docci_data/captioner_docci.json
+json path:/home/tachau/docci_data/captioner_docci.json
+/home/tachau/rethink_venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:424: UserWarning: This DataLoader will create 32 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+tạo train test xong
+  0%|          | 0/1205 [00:00<?, ?it/s]/home/tachau/rethink_venv/lib/python3.12/site-packages/torch/utils/data/dataloader.py:430: UserWarning: This DataLoader will create 32 worker processes in total. Our suggested max number of worker in current system is 20, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  self.check_worker_number_rationality()
+/home/tachau/Rethinking_project/train/train.py:375: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast():
+Epoch 0 ▶ total_loss: 18.4988 ▶ L_long: 6.2808 ▶ L_pos: 6.3603 ▶ L_longer: 5.8488 ▶ L_hinge: 0.0177 ▶ logit scale: 100.0000 --- tau: 0.0100
+  0%|          | 1/1205 [00:07<2:22:59,  7.13s/it]  0%|          | 2/1205 [00:07<1:01:39,  3.08s/it]  0%|          | 3/1205 [00:07<35:47,  1.79s/it]    0%|          | 4/1205 [00:07<23:42,  1.18s/it]

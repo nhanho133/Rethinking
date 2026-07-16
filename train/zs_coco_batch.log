@@ -1,0 +1,22 @@
+=== docci_ours_b96 (docci_bigbatch_ours/ckpt/llm2clip_text-B16-07-08--13_19_57_-29.pt) ===
+[RESULT]   T2I_R1: 17.3000%
+[RESULT]   T2I_R5: 37.2200%
+[RESULT]   T2I_R10: 48.9000%
+[RESULT]   I2T_R1: 16.0800%
+[RESULT]   I2T_R5: 35.8000%
+[RESULT]   I2T_R10: 48.1800%
+=== docci_vanilla_b96 (docci_bigbatch_vanilla/ckpt/llm2clip_text-B16-07-08--12_06_51_-29.pt) ===
+[RESULT]   T2I_R1: 18.2600%
+[RESULT]   T2I_R5: 40.7600%
+[RESULT]   T2I_R10: 52.2400%
+[RESULT]   I2T_R1: 22.2000%
+[RESULT]   I2T_R5: 44.1600%
+[RESULT]   I2T_R10: 55.7200%
+=== docci_ours_tuned_b96 (docci_bigbatch_ours_tuned/ckpt/llm2clip_text-B16-07-08--16_27_03_-19.pt) ===
+[RESULT]   T2I_R1: 18.2000%
+[RESULT]   T2I_R5: 39.7400%
+[RESULT]   T2I_R10: 50.5600%
+[RESULT]   I2T_R1: 16.0200%
+[RESULT]   I2T_R5: 37.2200%
+[RESULT]   I2T_R10: 48.9800%
+ALL_COCO_DONE

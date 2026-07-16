@@ -1,0 +1,67 @@
+[
+  {
+    "benchmark": "flickr30k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_vanilla_b16_50ep/ckpt/llm2clip_text-B16-07-07--19_15_46_-49.pt",
+    "arch": "text",
+    "n_images": 1000,
+    "n_captions": 5000,
+    "T2I_R1": 0.2648,
+    "T2I_R5": 0.5356,
+    "T2I_R10": 0.651,
+    "I2T_R1": 0.461,
+    "I2T_R5": 0.728,
+    "I2T_R10": 0.83
+  },
+  {
+    "benchmark": "coco",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_vanilla_b16_50ep/ckpt/llm2clip_text-B16-07-07--19_15_46_-49.pt",
+    "arch": "text",
+    "n_images": 5000,
+    "n_captions": 25014,
+    "T2I_R1": 0.1536739425921484,
+    "T2I_R5": 0.34160869912848807,
+    "T2I_R10": 0.4471096186135764,
+    "I2T_R1": 0.2918,
+    "I2T_R5": 0.5404,
+    "I2T_R10": 0.6456
+  },
+  {
+    "benchmark": "urban1k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_vanilla_b16_50ep/ckpt/llm2clip_text-B16-07-07--19_15_46_-49.pt",
+    "arch": "text",
+    "n_images": 1000,
+    "n_captions": 1000,
+    "T2I_R1": 0.504,
+    "T2I_R5": 0.75,
+    "T2I_R10": 0.836,
+    "I2T_R1": 0.652,
+    "I2T_R5": 0.847,
+    "I2T_R10": 0.911
+  },
+  {
+    "benchmark": "sg4v1k",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_vanilla_b16_50ep/ckpt/llm2clip_text-B16-07-07--19_15_46_-49.pt",
+    "arch": "text",
+    "n_images": 799,
+    "n_captions": 799,
+    "T2I_R1": 0.6758448060075094,
+    "T2I_R5": 0.9123904881101377,
+    "T2I_R10": 0.9637046307884856,
+    "I2T_R1": 0.8260325406758448,
+    "I2T_R5": 0.9662077596996246,
+    "I2T_R10": 0.9949937421777222
+  },
+  {
+    "benchmark": "docci",
+    "ckpt": "/home/tachau/Rethinking_project/train/llm2clip_text_vanilla_b16_50ep/ckpt/llm2clip_text-B16-07-07--19_15_46_-49.pt",
+    "arch": "text",
+    "n_images": 5100,
+    "n_captions": 5100,
+    "T2I_R1": 0.7421568627450981,
+    "T2I_R5": 0.9480392156862745,
+    "T2I_R10": 0.9807843137254902,
+    "I2T_R1": 0.754313725490196,
+    "I2T_R5": 0.9501960784313725,
+    "I2T_R10": 0.9798039215686275
+  }
+]

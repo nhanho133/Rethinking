@@ -1,0 +1,33 @@
+# Checkpoints — huge (many GB each), never commit
+**/ckpt/
+*.pt
+*.pth
+
+# TensorBoard event logs — large, not essential for repo history
+**/events.out.tfevents.*
+
+# Python bytecode
+__pycache__/
+*.pyc
+
+# Redundant zip archives at root (contents already tracked as directories)
+/rethinking_h100.zip
+/Rethinking.zip
+
+# Personal screenshots, not project output
+/Screenshot*.png
+
+# OS/editor cruft
+.DS_Store
+
+# Real credentials — never commit. See this file locally for the actual proxy password.
+SERVER_CREDENTIALS_LOCAL_ONLY.md
+
+# Stale duplicate snapshot of the project (older, incomplete copy with its own nested .git)
+/Rethinking/
+
+# Precomputed embedding cache artifacts, not source
+train/eval_all/cache_openeventv1/
+
+# Training log accidentally saved with a .py extension (not real source)
+train/datasets_config/share4v_no.py

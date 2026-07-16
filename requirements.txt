@@ -1,0 +1,27 @@
+# Rethinking + LLM2CLIP — Python deps (pinned to the working 3060 env, 2026-07).
+# NOTE ON TORCH: install torch/torchvision matching the H100 server's CUDA driver FIRST,
+# separately, then `pip install -r requirements.txt` for the rest. Example for CUDA 12.4:
+#   pip install torch==2.12.1 torchvision==0.27.1 --index-url https://download.pytorch.org/whl/cu124
+# (the versions below are what was tested; match the +cuXXX build to the server.)
+
+transformers==4.44.2
+llm2vec==0.2.3
+accelerate==1.14.0
+bitsandbytes==0.49.2          # only needed for 4-bit precompute; on H100 you can use bf16 instead
+sentencepiece==0.2.1
+safetensors==0.8.0
+huggingface-hub>=0.36
+ftfy==6.3.1
+regex
+tqdm
+pandas
+numpy
+pillow
+matplotlib==3.11.0
+requests
+scikit-learn
+scipy
+
+# OpenAI CLIP package (provides `import clip`) — installed from git:
+#   pip install git+https://github.com/openai/CLIP.git
+# If the server cannot reach github at install time, bundle the CLIP wheel/source separately.

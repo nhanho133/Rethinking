@@ -1,0 +1,67 @@
+[
+  {
+    "benchmark": "flickr30k",
+    "ckpt": "RELEASED",
+    "arch": "released",
+    "n_images": 1000,
+    "n_captions": 5000,
+    "T2I_R1": 0.8224,
+    "T2I_R5": 0.957,
+    "T2I_R10": 0.9764,
+    "I2T_R1": 0.941,
+    "I2T_R5": 0.996,
+    "I2T_R10": 0.998
+  },
+  {
+    "benchmark": "coco",
+    "ckpt": "RELEASED",
+    "arch": "released",
+    "n_images": 5000,
+    "n_captions": 25014,
+    "T2I_R1": 0.5375789557847606,
+    "T2I_R5": 0.7762453026305269,
+    "T2I_R10": 0.8514032142000479,
+    "I2T_R1": 0.6692,
+    "I2T_R5": 0.8712,
+    "I2T_R10": 0.9228
+  },
+  {
+    "benchmark": "urban1k",
+    "ckpt": "RELEASED",
+    "arch": "released",
+    "n_images": 1000,
+    "n_captions": 1000,
+    "T2I_R1": 0.966,
+    "T2I_R5": 0.997,
+    "T2I_R10": 0.999,
+    "I2T_R1": 0.962,
+    "I2T_R5": 0.998,
+    "I2T_R10": 1.0
+  },
+  {
+    "benchmark": "sg4v1k",
+    "ckpt": "RELEASED",
+    "arch": "released",
+    "n_images": 799,
+    "n_captions": 799,
+    "T2I_R1": 0.9887359198998749,
+    "T2I_R5": 1.0,
+    "T2I_R10": 1.0,
+    "I2T_R1": 0.9937421777221527,
+    "I2T_R5": 1.0,
+    "I2T_R10": 1.0
+  },
+  {
+    "benchmark": "docci",
+    "ckpt": "RELEASED",
+    "arch": "released",
+    "n_images": 5100,
+    "n_captions": 5100,
+    "T2I_R1": 0.9072549019607843,
+    "T2I_R5": 0.9884313725490196,
+    "T2I_R10": 0.9962745098039215,
+    "I2T_R1": 0.8992156862745098,
+    "I2T_R5": 0.9872549019607844,
+    "I2T_R10": 0.995686274509804
+  }
+]

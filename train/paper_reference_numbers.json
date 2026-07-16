@@ -1,0 +1,18 @@
+{
+  "_source": "arXiv:2411.04997 Table 2, ViT-L/14@336px section (verified via WebFetch)",
+  "clip_l14_336_baseline": {
+    "flickr30k": {"I2T_R1": 0.877, "T2I_R1": 0.670},
+    "coco":      {"I2T_R1": 0.580, "T2I_R1": 0.371},
+    "sg4v1k":    {"I2T_R1": 0.862, "T2I_R1": 0.840},
+    "urban1k":   {"I2T_R1": 0.728, "T2I_R1": 0.570},
+    "docci":     {"I2T_R1": 0.674, "T2I_R1": 0.657}
+  },
+  "llm2clip_15m_336": {
+    "_caveat": "Trained on DreamLIP-recaptioned CC3M+CC12M (~15M pairs) at 336px -- more data than our runs use. No published 336px+CC3M-only (3M) row exists in the paper (3M is only reported at 224px). Cited here as the closest available reference, not a controlled baseline.",
+    "flickr30k": {"I2T_R1": 0.912, "T2I_R1": 0.821},
+    "coco":      {"I2T_R1": 0.655, "T2I_R1": 0.536},
+    "sg4v1k":    {"I2T_R1": 0.981, "T2I_R1": 0.984},
+    "urban1k":   {"I2T_R1": 0.903, "T2I_R1": 0.932},
+    "docci":     {"I2T_R1": 0.877, "T2I_R1": 0.890}
+  }
+}
