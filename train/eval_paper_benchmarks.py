@@ -68,6 +68,36 @@ def load_flickr30k_items(eval_data_root, max_items=None):
     return items
 
 
+def load_flickr30k_items_local(luongtk_flickr_root, seed=42, n=1000, max_items=None):
+    """ALTERNATE source: /cm/archive/luongtk/flickr/ (captions.txt + Images/), already present
+    on this server -- no download needed. CAVEAT: captions.txt has NO split column, so this is
+    a seeded 1000-image proxy subset, NOT the paper's exact Karpathy 1K test list. Must use the
+    SAME seed/n as precompute_llm2vec_embeddings.py's load_flickr30k_local_eval_captions (both
+    default seed=42, n=1000) or the cache will miss."""
+    import csv
+    import random
+    csv_path = os.path.join(luongtk_flickr_root, "captions.txt")
+    image_root = os.path.join(luongtk_flickr_root, "Images")
+    images = set()
+    with open(csv_path, encoding="utf8") as f:
+        rows = list(csv.DictReader(f))
+    for row in rows:
+        images.add(row["image"])
+    selected = set(random.Random(seed).sample(sorted(images), min(n, len(images))))
+    items = []
+    for row in rows:
+        if row["image"] not in selected:
+            continue
+        items.append({
+            "image_id": row["image"],
+            "image_path": os.path.join(image_root, row["image"]),
+            "caption": row["caption"].strip(),
+        })
+    if max_items:
+        items = items[:max_items]
+    return items
+
+
 def load_coco_items(eval_data_root, max_items=None):
     ann_path = os.path.join(eval_data_root, "coco", "annotations", "captions_val2017.json")
     image_root = os.path.join(eval_data_root, "coco", "val2017")
@@ -86,8 +116,8 @@ def load_coco_items(eval_data_root, max_items=None):
     return items
 
 
-def load_urban1k_items(eval_data_root, max_items=None):
-    root = os.path.join(eval_data_root, "urban1k", "Urban1k")
+def load_urban1k_items(eval_data_root, max_items=None, urban1k_root=None):
+    root = urban1k_root or os.path.join(eval_data_root, "urban1k", "Urban1k")
     cap_dir, img_dir = os.path.join(root, "caption"), os.path.join(root, "image")
     ids = sorted(fn[:-4] for fn in os.listdir(cap_dir) if fn.endswith(".txt"))
     if max_items:
@@ -169,10 +199,16 @@ def _load_sg4v1k(args):
     return load_sg4v1k_items(args.sharegpt4v_full_json, args.sharegpt4v_image_root, args.max_items)
 
 
+def _load_flickr30k(args):
+    if args.flickr_source == "luongtk_local":
+        return load_flickr30k_items_local(args.flickr_luongtk_root, max_items=args.max_items)
+    return load_flickr30k_items(args.eval_data_root, args.max_items)
+
+
 LOADERS = {
-    "flickr30k": lambda args: load_flickr30k_items(args.eval_data_root, args.max_items),
+    "flickr30k": _load_flickr30k,
     "coco": lambda args: load_coco_items(args.eval_data_root, args.max_items),
-    "urban1k": lambda args: load_urban1k_items(args.eval_data_root, args.max_items),
+    "urban1k": lambda args: load_urban1k_items(args.eval_data_root, args.max_items, args.urban1k_root),
     "sg4v1k": _load_sg4v1k,
     "docci": lambda args: load_docci_items(args.docci_json, args.docci_image_root, max_items=args.max_items),
 }
@@ -338,6 +374,14 @@ def main():
                          "tree); 'manifest' = local machine (pre-built manifest.json's test split).")
     ap.add_argument("--sg4v_manifest_json", default=None)
     ap.add_argument("--sg4v_manifest_image_root", default=None)
+    ap.add_argument("--urban1k_root", default=None,
+                    help="Direct override to an existing caption/+image/ root "
+                         "(e.g. /cm/archive/luongtk/Urban1k) -- skips the eval_data_root layout.")
+    ap.add_argument("--flickr_source", choices=["hf", "luongtk_local"], default="hf",
+                    help="'hf' = Karpathy-split CSV (paper-accurate). 'luongtk_local' = plain "
+                         "image,caption CSV with no split info -- seeded 1000-image proxy.")
+    ap.add_argument("--flickr_luongtk_root", default=None,
+                    help="Root containing captions.txt + Images/ (for --flickr_source luongtk_local).")
     ap.add_argument("--llm2clip_released_ckpt", default=LLM2CLIP_RELEASED_CKPT)
     ap.add_argument("--batch_size", type=int, default=64)
     ap.add_argument("--max_items", type=int, default=None)

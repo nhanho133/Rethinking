@@ -182,6 +182,38 @@ def load_flickr30k_eval_captions(eval_data_root):
     return out
 
 
+def _flickr30k_local_1k_images(luongtk_flickr_root, seed=42, n=1000):
+    """Deterministic 1000-image subset from a plain image,caption CSV with NO split column
+    (e.g. /cm/archive/luongtk/flickr/captions.txt) -- NOT the paper's Karpathy 1K test split,
+    just a reproducible proxy. Returns the sorted+seeded-sampled list of image filenames."""
+    import csv
+    import random
+    csv_path = os.path.join(luongtk_flickr_root, "captions.txt")
+    images = set()
+    with open(csv_path, encoding="utf8") as f:
+        for row in csv.DictReader(f):
+            images.add(row["image"])
+    images = sorted(images)
+    return random.Random(seed).sample(images, min(n, len(images)))
+
+
+def load_flickr30k_local_eval_captions(luongtk_flickr_root, seed=42, n=1000):
+    """ALTERNATE source: /cm/archive/luongtk/flickr/ (captions.txt + Images/), already present
+    on this server, no download needed. CAVEAT: no Karpathy split info -- this is a seeded
+    1000-image proxy subset (not the paper's exact 1K test list), same caveat class as the
+    sg4v1k 'manifest' proxy source."""
+    import csv
+    selected = set(_flickr30k_local_1k_images(luongtk_flickr_root, seed, n))
+    csv_path = os.path.join(luongtk_flickr_root, "captions.txt")
+    out = []
+    with open(csv_path, encoding="utf8") as f:
+        for row in csv.DictReader(f):
+            if row["image"] in selected:
+                out.append(row["caption"].strip())
+    print(f"[collect] Flickr30K (local luongtk proxy, seed={seed}): {len(selected)} images, {len(out)} captions")
+    return out
+
+
 def load_coco_eval_captions(eval_data_root):
     """COCO val2017, ALL captions per image (paper protocol: 5K images x ~5 captions)."""
     ann_path = os.path.join(eval_data_root, "coco", "annotations", "captions_val2017.json")
@@ -191,9 +223,12 @@ def load_coco_eval_captions(eval_data_root):
     return out
 
 
-def load_urban1k_eval_captions(eval_data_root):
-    """1000 images, 1 caption/image (long, dense -- like DOCCI/SG4V, not short alt-text)."""
-    cap_dir = os.path.join(eval_data_root, "urban1k", "Urban1k", "caption")
+def load_urban1k_eval_captions(eval_data_root, urban1k_root=None):
+    """1000 images, 1 caption/image (long, dense -- like DOCCI/SG4V, not short alt-text).
+    urban1k_root: direct override to a root already containing caption/+image/ (e.g. an
+    existing /cm/archive/luongtk/Urban1k/ -- same format, skips the download step entirely)."""
+    cap_dir = os.path.join(urban1k_root, "caption") if urban1k_root else \
+        os.path.join(eval_data_root, "urban1k", "Urban1k", "caption")
     out = []
     for fname in sorted(os.listdir(cap_dir)):
         if not fname.endswith(".txt"):
@@ -224,11 +259,14 @@ def load_sg4v1k_eval_captions(sg4v_source="full_json", manifest_json=None):
     return out
 
 
-def collect_eval_strings(dataset, eval_data_root, sg4v_source="full_json", sg4v_manifest_json=None):
+def collect_eval_strings(dataset, eval_data_root, sg4v_source="full_json", sg4v_manifest_json=None,
+                          urban1k_root=None, flickr_source="hf", flickr_luongtk_root=None):
     loader = {
-        "flickr30k": lambda: load_flickr30k_eval_captions(eval_data_root),
+        "flickr30k": lambda: (load_flickr30k_local_eval_captions(flickr_luongtk_root)
+                              if flickr_source == "luongtk_local"
+                              else load_flickr30k_eval_captions(eval_data_root)),
         "coco": lambda: load_coco_eval_captions(eval_data_root),
-        "urban1k": lambda: load_urban1k_eval_captions(eval_data_root),
+        "urban1k": lambda: load_urban1k_eval_captions(eval_data_root, urban1k_root),
         "sg4v1k": lambda: load_sg4v1k_eval_captions(sg4v_source, sg4v_manifest_json),
     }[dataset]
     captions = loader()
@@ -294,6 +332,15 @@ def main():
                     help="For --dataset sg4v1k --eval_mode: 'full_json' (server) or "
                          "'manifest' (local, no full image tree).")
     ap.add_argument("--sg4v_manifest_json", type=str, default=None)
+    ap.add_argument("--urban1k_root", type=str, default=None,
+                    help="Direct override to an existing caption/+image/ root "
+                         "(e.g. /cm/archive/luongtk/Urban1k) -- skips downloading.")
+    ap.add_argument("--flickr_source", choices=["hf", "luongtk_local"], default="hf",
+                    help="'hf' = flickr_annotations_30k.csv with Karpathy split (paper-accurate). "
+                         "'luongtk_local' = plain image,caption CSV with NO split info -- "
+                         "seeded 1000-image proxy, not the exact paper test set.")
+    ap.add_argument("--flickr_luongtk_root", type=str, default=None,
+                    help="Root containing captions.txt + Images/ (for --flickr_source luongtk_local).")
     ap.add_argument("--max_num_short_texts", type=int, default=4)
     ap.add_argument("--out_dir", type=str, required=True,
                     help="Directory to write part_NNNNN.pt files (one per part_size chunk).")
@@ -328,7 +375,10 @@ def main():
     if args.eval_mode:
         strings = sorted(collect_eval_strings(args.dataset, args.eval_data_root,
                                               sg4v_source=args.sg4v_source,
-                                              sg4v_manifest_json=args.sg4v_manifest_json),
+                                              sg4v_manifest_json=args.sg4v_manifest_json,
+                                              urban1k_root=args.urban1k_root,
+                                              flickr_source=args.flickr_source,
+                                              flickr_luongtk_root=args.flickr_luongtk_root),
                          key=lambda s: (len(s), s))
     else:
         strings = sorted(collect_all_strings(args.max_num_short_texts, dataset=args.dataset),
